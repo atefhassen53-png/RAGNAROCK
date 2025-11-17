@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RAGNAROK</title>
+  <!-- Google Fonts: Uncial Antiqua (viking/uncial look) and Cinzel for supporting text -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #071021; /* deep night */
+      --bg2: #0b1f2b; /* teal-ish */
+      --accent: #ffd679; /* warm gold */
+      --glow: #ffb86b;
+      --viking: 'Uncial Antiqua', serif;
+      --support: 'Cinzel', serif;
+    }
+
+    html,body{height:100%;margin:0;font-family:var(--support);background:linear-gradient(135deg,var(--bg1),var(--bg2));}
+
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:4rem 1rem;
+      box-sizing:border-box;
+      background-image: radial-gradient(circle at 10% 10%, rgba(255,200,120,0.04) 0 120px, transparent 120px),
+                        radial-gradient(circle at 90% 80%, rgba(120,200,255,0.03) 0 220px, transparent 220px);
+    }
+
+    .card{
+      max-width:1100px;
+      width:100%;
+      text-align:center;
+      padding:3.5rem 2rem;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 10px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px) saturate(1.1);
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Viking decorative corner shapes (subtle) */
+    .card::before, .card::after{
+      content:'';
+      position:absolute;
+      width:260px;height:260px;opacity:0.08;
+      background-image: radial-gradient(circle at 30% 30%, rgba(255,200,120,0.18), transparent 25%),
+                        radial-gradient(circle at 70% 70%, rgba(200,230,255,0.08), transparent 40%);
+      transform:rotate(35deg);
+      pointer-events:none;
+    }
+    .card::before{left:-80px;top:-90px}
+    .card::after{right:-80px;bottom:-90px}
+
+    /* The main viking title */
+    .viking-title{
+      font-family:var(--viking);
+      font-size:clamp(48px, 12vw, 160px);
+      line-height:0.85;
+      letter-spacing:0.06em;
+      color:var(--accent);
+      display:inline-block;
+      padding:0.25rem 1rem;
+      transform:translateZ(0);
+      text-transform:uppercase;
+      /* layered glow */
+      text-shadow:
+        0 2px 0 rgba(0,0,0,0.35),
+        0 6px 18px rgba(0,0,0,0.6),
+        0 0 10px rgba(255,184,112,0.25),
+        0 0 28px rgba(255,150,60,0.16);
+      position:relative;
+    }
+
+    /* animated outer glow using pseudo-element */
+    .viking-title::after{
+      content:'';
+      position:absolute;inset:-12px;
+      border-radius:8px;
+      filter:blur(18px) saturate(1.2);
+      opacity:0.55;
+      background: radial-gradient(ellipse at center, rgba(255,200,120,0.45), rgba(255,120,40,0.07));
+      z-index:-2;
+      animation: pulseGlow 3.6s ease-in-out infinite;
+      mix-blend-mode:screen;
+    }
+
+    @keyframes pulseGlow{
+      0%{ transform:scale(0.98); opacity:0.5 }
+      50%{ transform:scale(1.03); opacity:0.8 }
+      100%{ transform:scale(0.98); opacity:0.5 }
+    }
+
+    /* small subtitle */
+    .subtitle{
+      margin-top:0.4rem;
+      font-size:clamp(12px, 2.6vw, 18px);
+      color:rgba(255,255,255,0.85);
+      letter-spacing:0.06em;
+    }
+
+    /* big rune / emblem behind the title */
+    .emblem{
+      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+      width:420px;height:420px;opacity:0.06;pointer-events:none;user-select:none;
+      filter: blur(1px) saturate(1.1);
+    }
+
+    /* responsive adjustments */
+    @media (max-width:720px){
+      .card{padding:2.2rem 1rem}
+      .emblem{width:260px;height:260px}
+    }
+
+    /* small instruction box */
+    .info{
+      margin-top:1.6rem;font-size:0.95rem;color:rgba(255,255,255,0.75);
+      display:flex;gap:0.6rem;align-items:center;justify-content:center;flex-wrap:wrap
+    }
+
+    .btn{
+      display:inline-block;padding:0.5rem 0.9rem;border-radius:999px;background:linear-gradient(90deg, rgba(255,190,90,0.12), rgba(255,130,50,0.06));border:1px solid rgba(255,190,90,0.12);font-weight:600;color:var(--accent);text-decoration:none
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+
+      <!-- large faint emblem (viking knot) as inline SVG -->
+      <svg class="emblem" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+        <g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" style="color:#ffd679">
+          <path d="M100 14 C70 14 46 36 46 66 C46 96 70 118 100 118 C130 118 154 96 154 66 C154 36 130 14 100 14 Z"/>
+          <path d="M54 66 C54 96 72 126 100 126 C128 126 146 96 146 66"/>
+          <path d="M100 126 L100 186"/>
+        </g>
+      </svg>
+
+      <!-- THE TITLE: change the word RAGNAROK below to whatever you like -->
+      <h1 class="viking-title">RAGNAROK</h1>
+      <div class="subtitle">We are a battlebot team powred by  INTELLECT  driven by VALUE</div>
+
+      <div class="info">
+        <div style="opacity:0.9">Font: <strong>Uncial Antiqua</strong></div>
+        <a class="btn" href="#" onclick="alert('Change the title text inside the HTML: replace MOBILE with your word')">How to edit</a>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
